@@ -1,0 +1,22 @@
+{
+  "order_id": "ORD1002",
+  "customer": {
+    "id": "CUST102",
+    "name": "Amit Kumar"
+  },
+  "items": [
+    {
+      "sku": "P1002",
+      "qty": 1,
+      "price": 800
+    }
+  ],
+  "payment": {
+    "status": "PAID",
+    "mode": "CARD"
+  },
+  "shipping": {
+    "city": "Patna",
+    "pincode": "800001"
+  }
+}

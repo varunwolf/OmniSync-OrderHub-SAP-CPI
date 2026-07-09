@@ -1,0 +1,23 @@
+{
+  "order_id": "ORD1003",
+  "customer": {
+    "id": "CUST103",
+    "name": "Sneha Reddy",
+    "email": "sneha@example.com"
+  },
+  "items": [
+    {
+      "sku": "P1003",
+      "qty": 100,
+      "price": 1500
+    }
+  ],
+  "payment": {
+    "status": "PAID",
+    "mode": "UPI"
+  },
+  "shipping": {
+    "city": "Hyderabad",
+    "pincode": "500081"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "order_id": "ORD1001",
+  "customer": {
+    "id": "CUST101",
+    "name": "Rahul Sharma",
+    "email": "rahul@example.com"
+  },
+  "items": [
+    {
+      "sku": "P1001",
+      "qty": 2,
+      "price": 1200
+    }
+  ],
+  "payment": {
+    "status": "PAID",
+    "mode": "UPI"
+  },
+  "shipping": {
+    "city": "Bangalore",
+    "pincode": "560037"
+  }
+}
