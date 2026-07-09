@@ -1,0 +1,114 @@
+# iFlow 01 - Order Intake to SFTP Staging
+
+## Purpose
+
+This integration flow receives customer order JSON from an external client through an HTTPS endpoint and stores the raw order file in an AWS EC2 SFTP inbox directory.
+
+This is the first successfully tested integration flow of the OmniSync OrderHub project.
+
+## Sender
+
+Postman_Client / External Storefront
+
+## Receiver
+
+AWS_EC2_SFTP
+
+## Adapters Used
+
+- HTTPS Sender Adapter
+- SFTP Receiver Adapter
+
+## HTTPS Endpoint
+
+/order_sftp_staging
+
+## SFTP Target
+
+Directory:
+
+inbox
+
+Resolved EC2 Path:
+
+/home/cpiuser/inbox
+
+File Name:
+
+order_test.json
+
+Append Timestamp:
+
+Enabled
+
+## Security Material
+
+Credential Name:
+
+sftp_cap
+
+Credential Type:
+
+User Credentials
+
+Actual SFTP User:
+
+cpiuser
+
+## Important Configuration Note
+
+In this CPI tenant, the SFTP receiver adapter uses the Security Material credential name in the User Name field.
+
+Working configuration:
+
+- SFTP Adapter User Name: sftp_cap
+- Security Material Name: sftp_cap
+- Security Material User: cpiuser
+- SFTP Directory: inbox
+
+The directory must be configured as `inbox`, not `/home/cpiuser/inbox`, because the SFTP adapter resolves the path relative to the SFTP user home directory.
+
+## Flow Steps
+
+Postman_Client  
+→ HTTPS Sender Adapter  
+→ Start  
+→ Prepare Order File  
+→ End  
+→ SFTP Receiver  
+→ AWS_EC2_SFTP
+
+## Test Result
+
+A JSON order payload was sent from Postman to the SAP CPI HTTPS endpoint. SAP CPI successfully transferred the payload to the AWS EC2 SFTP inbox directory.
+
+Created file example:
+
+/home/cpiuser/inbox/order_test20260709214045.json
+
+## Sample Payload Stored in SFTP
+
+```json
+{
+  "order_id": "ORD1001",
+  "customer": {
+    "id": "CUST101",
+    "name": "Rahul Sharma",
+    "email": "rahul@example.com"
+  },
+  "items": [
+    {
+      "sku": "P1001",
+      "qty": 2,
+      "price": 1200
+    }
+  ],
+  "payment": {
+    "status": "PAID",
+    "mode": "UPI"
+  },
+  "shipping": {
+    "city": "Bangalore",
+    "pincode": "560037"
+  }
+}
